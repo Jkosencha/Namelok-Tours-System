@@ -9,8 +9,11 @@ import { registerLicense } from '@syncfusion/ej2-base';
 registerLicense('Ngo9BigBOggjHTQxAR8/V1NAaF5cWWZCf1FpRmJGdld5fUVHYVZUTXxaS00DNHVRdkdnWX5fcXVSRmheVkF0W0c=');
 
 ReactDOM.render(
-    <ContextProvider>
+    <React.StrictMode>
+        <ContextProvider>
         <App />
-    </ContextProvider>,
+    </ContextProvider>
+    </React.StrictMode>,
+    
     document.getElementById('root'));
 

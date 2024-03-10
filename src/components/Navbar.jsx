@@ -1,4 +1,4 @@
-/* eslint-disable jsx-a11y/alt-text */
+ /* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { FiShoppingCart } from 'react-icons/fi';
@@ -31,16 +31,35 @@ const NavButton = ({ title, CustomFunc, icon, Color, dotColor }) => (
 
 
 const Navbar = () => {
-  const{ activeMenu, setActiveMenu, isClicked, setIsClicked } = useStateContext();
+  const{ currentColor, activeMenu, setActiveMenu, handleClick, isClicked, setScreenSize, screenSize } = useStateContext();
 
- 
+  useEffect(() => {
+    const handleResize = () => setScreenSize(window.innerWidth);
+
+    window.addEventListener('resize', handleResize);
+
+    handleResize();
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, [setScreenSize]);
+
+  useEffect(() => {
+    if (screenSize <= 900) {
+      setActiveMenu(false);
+    } else {
+      setActiveMenu(true);
+    }
+  }, [screenSize, setActiveMenu]);
+
+  const handleActiveMenu = () => setActiveMenu(!activeMenu);
+
 
   return (
     <div className='flex justify-between p-2 md:mx-6 relative'>
       <NavButton 
       title='menu' 
-      CustomFunc={() => setActiveMenu((prevActiveMenu) => !prevActiveMenu)} 
-      Color='blue' 
+      CustomFunc={() => handleActiveMenu((prevActiveMenu) => !prevActiveMenu)} 
+      Color={currentColor}
       icon={<AiOutlineMenu/>} />
 
       <div className='flex'>
@@ -48,7 +67,7 @@ const Navbar = () => {
       title='Cart' 
       // eslint-disable-next-line no-undef
       CustomFunc={() => handleClick('cart')} 
-      Color='blue' 
+      Color={currentColor}
       icon={<FiShoppingCart/>} />
       
       <NavButton 
@@ -56,7 +75,7 @@ const Navbar = () => {
       dotColor='#03c9d7' 
       // eslint-disable-next-line no-undef
       CustomFunc={() => handleClick('chat')} 
-      Color='blue' 
+      Color={currentColor}
       icon={<BsChatLeft/>} />
       
       <NavButton 
@@ -64,7 +83,7 @@ const Navbar = () => {
       dotColor='#03c9d7'
       // eslint-disable-next-line no-undef
       CustomFunc={() => handleClick('notification')} 
-      Color='blue' 
+      Color={currentColor}
       icon={<RiNotification3Line/>} />
       
       <TooltipComponent 
