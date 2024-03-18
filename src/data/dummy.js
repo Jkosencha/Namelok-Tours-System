@@ -474,7 +474,7 @@ export const links = [
     title: 'Dashboard',
     links: [
       {
-        name: 'ecommerce',
+        name: 'MyNamelok',
         icon: <FiShoppingBag />,
       },
     ],
@@ -484,11 +484,11 @@ export const links = [
     title: 'Pages',
     links: [
       {
-        name: 'orders',
+        name: 'Bookings', //orders
         icon: <AiOutlineShoppingCart />,
       },
       {
-        name: 'employees',
+        name: 'Agents', //employees
         icon: <IoMdContacts />,
       },
       {
